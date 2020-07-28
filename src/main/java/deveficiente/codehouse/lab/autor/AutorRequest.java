@@ -17,6 +17,12 @@ public class AutorRequest {
     @NotBlank
     private String descricao;
 
+    public AutorRequest(String nome, String email, String descricao) {
+        this.nome = nome;
+        this.email = email;
+        this.descricao = descricao;
+    }
+
     public String getNome() {
         return nome;
     }

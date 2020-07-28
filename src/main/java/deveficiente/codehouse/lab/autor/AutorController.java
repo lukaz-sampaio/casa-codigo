@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -40,9 +41,9 @@ public class AutorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarAutor(@RequestBody @Valid AutorRequest autorForm) {
+    public ResponseEntity<Autor> cadastrarAutor(@RequestBody @Valid AutorRequest autorForm) {
         Autor novoAutor = autorForm.novoAutor();
         entityManager.persist(novoAutor);
-        return ResponseEntity.ok(novoAutor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoAutor);
     }
 }

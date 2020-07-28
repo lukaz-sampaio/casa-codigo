@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS pgd.tb_autor1 (
+CREATE TABLE IF NOT EXISTS pgd.tb_autor (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(80) NOT NULL,
     email VARCHAR(60) NOT NULL,
