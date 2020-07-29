@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS pgd.tb_categoria (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(80) NOT NULL
+);

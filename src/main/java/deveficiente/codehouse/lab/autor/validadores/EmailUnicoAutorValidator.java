@@ -11,9 +11,11 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- *
+ * Usar anotação @Unique
+ * 
  * @author lucas
  */
+@Deprecated
 @Component
 public class EmailUnicoAutorValidator implements Validator {
 

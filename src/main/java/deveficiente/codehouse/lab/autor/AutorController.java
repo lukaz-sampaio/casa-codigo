@@ -26,6 +26,11 @@ public class AutorController {
     @PersistenceContext
     private final EntityManager entityManager;
 
+    /*
+    Resolvi manter essa implementação por ser nova e esse projeto servir apenas
+    para fins didáticos. Mas pode se usar a annotation @Unique na classe
+    AutorRequest.java nos campos que devem ser únicos.
+    */
     @Autowired
     EmailUnicoAutorValidator emailUnicoAutorValidator;
 

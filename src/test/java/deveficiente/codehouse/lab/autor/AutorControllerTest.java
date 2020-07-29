@@ -2,7 +2,6 @@ package deveficiente.codehouse.lab.autor;
 
 import deveficiente.codehouse.lab.root.AbstractControllerTest;
 import java.util.Optional;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,12 +19,6 @@ public class AutorControllerTest extends AbstractControllerTest {
     private AutorRepository autorRepository;
 
     private final AutorRequest autorRequest = new AutorRequest("Autor", "autor1@email.com", "Descricao Autor");
-
-    @Override
-    @Before
-    protected void setUp() {
-        super.setUp();
-    }
 
     @Test
     public void cadastrarAutor_status201() throws Exception {
