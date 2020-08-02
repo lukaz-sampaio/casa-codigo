@@ -35,9 +35,19 @@ public class ApiError {
     @JsonFormat(pattern = "MM-dd-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private final LocalDateTime timestamp = LocalDateTime.now();
     private int status;
-    private HttpStatus error;
+    private String error;
     private String message;
     private List<ErrorDetail> errors;
+
+    public ApiError(HttpStatus error) {
+        this.error = error.getReasonPhrase();
+        this.status = error.value();
+    }
+
+    public ApiError(HttpStatus error, String message) {
+        this(error);
+        this.message = message;
+    }
 
     public LocalDateTime getTimestamp() {
         return timestamp;
@@ -47,16 +57,8 @@ public class ApiError {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public HttpStatus getError() {
+    public String getError() {
         return error;
-    }
-
-    public void setError(HttpStatus error) {
-        this.error = error;
     }
 
     public String getMessage() {

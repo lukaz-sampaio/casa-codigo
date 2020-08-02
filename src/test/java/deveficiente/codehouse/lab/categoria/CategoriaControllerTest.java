@@ -17,7 +17,7 @@ public class CategoriaControllerTest extends AbstractControllerTest {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    private final CategoriaRequest categoriaDefault = new CategoriaRequest("categoria");
+    private final CategoriaRequest categoriaDefault = new CategoriaRequest("outra categoria");
 
     @Test
     public void cadastrarCategoria_status201() throws Exception {

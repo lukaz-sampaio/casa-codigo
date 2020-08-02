@@ -18,7 +18,8 @@ public class AutorControllerTest extends AbstractControllerTest {
     @Autowired
     private AutorRepository autorRepository;
 
-    private final AutorRequest autorRequest = new AutorRequest("Autor", "autor1@email.com", "Descricao Autor");
+    private final AutorRequest autorRequest = new AutorRequest(
+            "Autor Teste", "autorteste@email.com", "Descricao Autor Teste");
 
     @Test
     public void cadastrarAutor_status201() throws Exception {
