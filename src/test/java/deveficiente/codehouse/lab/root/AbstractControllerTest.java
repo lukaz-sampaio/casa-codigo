@@ -3,6 +3,8 @@ package deveficiente.codehouse.lab.root;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 @AutoConfigureMockMvc
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @ActiveProfiles(profiles = "test")
+@Sql(scripts = "/db/patch/insert*.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public abstract class AbstractControllerTest {
 
     @Autowired
@@ -45,6 +49,8 @@ public abstract class AbstractControllerTest {
     }
 
     protected String mapToJson(Object object) throws JsonProcessingException {
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return objectMapper.writeValueAsString(object);
     }
 
