@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -23,7 +24,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> builder(ApiError apiError) {
-        return new ResponseEntity(apiError, apiError.getError());
+        return new ResponseEntity(apiError, HttpStatus.valueOf(apiError.getStatus()));
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
+        return builder(new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage()));
     }
 
     @Override
@@ -35,9 +41,7 @@ public class CustomResponseExceptionHandler extends ResponseEntityExceptionHandl
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         List<ObjectError> globalErrors = ex.getBindingResult().getGlobalErrors();
 
-        ApiError apiError = new ApiError();
-        apiError.setError(HttpStatus.BAD_REQUEST);
-        apiError.setStatus(HttpStatus.BAD_REQUEST.value());
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
         apiError.setMessage(ex.getLocalizedMessage());
         apiError.addFieldError(fieldErrors);
         apiError.addGlobalError(globalErrors);
