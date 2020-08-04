@@ -39,6 +39,10 @@ public class ApiError {
     private String message;
     private List<ErrorDetail> errors;
 
+    @Deprecated
+    public ApiError() {
+    }
+
     public ApiError(HttpStatus error) {
         this.error = error.getReasonPhrase();
         this.status = error.value();
