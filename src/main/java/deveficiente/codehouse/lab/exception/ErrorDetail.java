@@ -23,6 +23,10 @@ public class ErrorDetail {
     private Object rejectedValue;
     private String field;
 
+    @Deprecated
+    public ErrorDetail() {
+    }
+
     public ErrorDetail(String defaultMessage, String objectName, Object rejectedValue, String field) {
         this.defaultMessage = defaultMessage;
         this.objectName = objectName;
